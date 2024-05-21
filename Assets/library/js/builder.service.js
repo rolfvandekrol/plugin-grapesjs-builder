@@ -6,7 +6,7 @@ import grapesjspostcss from 'grapesjs-parser-postcss';
 import contentService from 'grapesjs-preset-mautic/dist/content.service';
 import grapesjsmautic from 'grapesjs-preset-mautic';
 import editorFontsService from 'grapesjs-preset-mautic/dist/editorFonts/editorFonts.service';
-import 'grapesjs-plugin-ckeditor5';
+import grapesjsckeditor from 'grapesjs-plugin-ckeditor5';
 
 // for local dev
 // import contentService from '../../../../../../grapesjs-preset-mautic/src/content.service';
@@ -154,13 +154,13 @@ export default class BuilderService {
       styleManager: {
         clearProperties: true, // Temp fix https://github.com/artf/grapesjs-preset-webpage/issues/27
       },
-      plugins: [grapesjswebpage, grapesjspostcss, grapesjsmautic, 'gjs-plugin-ckeditor5'],
+      plugins: [grapesjswebpage, grapesjspostcss, grapesjsmautic, grapesjsckeditor],
       pluginsOpts: {
         [grapesjswebpage]: {
           formsOpts: false,
         },
         grapesjsmautic: BuilderService.getMauticConf('page-html'),
-        'gjs-plugin-ckeditor5': BuilderService.getCkeConf('page:getBuilderTokens'),
+        [grapesjsckeditor]: BuilderService.getCkeConf('page:getBuilderTokens'),
       },
     });
 
@@ -185,11 +185,11 @@ export default class BuilderService {
       },
       storageManager: false,
       assetManager: this.getAssetManagerConf(),
-      plugins: [grapesjsmjml, grapesjspostcss, grapesjsmautic, 'gjs-plugin-ckeditor5'],
+      plugins: [grapesjsmjml, grapesjspostcss, grapesjsmautic, grapesjsckeditor],
       pluginsOpts: {
         grapesjsmjml: {},
         grapesjsmautic: BuilderService.getMauticConf('email-mjml'),
-        'gjs-plugin-ckeditor5': BuilderService.getCkeConf('email:getBuilderTokens'),
+        [grapesjsckeditor]: BuilderService.getCkeConf('email:getBuilderTokens'),
       },
     });
     this.unsetComponentVoidTypes(this.editor);
@@ -229,11 +229,11 @@ export default class BuilderService {
       },
       storageManager: false,
       assetManager: this.getAssetManagerConf(),
-      plugins: [grapesjsnewsletter, grapesjspostcss, grapesjsmautic, 'gjs-plugin-ckeditor5'],
+      plugins: [grapesjsnewsletter, grapesjspostcss, grapesjsmautic, grapesjsckeditor],
       pluginsOpts: {
         grapesjsnewsletter: {},
         grapesjsmautic: BuilderService.getMauticConf('email-html'),
-        'gjs-plugin-ckeditor5': BuilderService.getCkeConf('email:getBuilderTokens'),
+        [grapesjsckeditor]: BuilderService.getCkeConf('email:getBuilderTokens'),
       },
     });
 
